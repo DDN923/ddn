@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관측일지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@300;400&family=Noto+Sans+KR:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#090A0D; --slab:#101318; --inset:#171B21;
+    --bone:#DDD9D0; --ash:#6B7280; --ash-2:#454C57;
+    --ember:#C4565E; --line:rgba(221,217,208,.10);
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --serif:'Gowun Batang',serif;
+    --sans:'Noto Sans KR',sans-serif;
+    --hand:'Gaegu',cursive;
+    --paper:#F2ECDD; --rule:rgba(74,96,124,.20); --margin:#C4736B;
+    --graphite:#2E3440; --pencil:#5C6674;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--void);color:var(--bone);font-family:var(--sans);
+    font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased;padding:26px 16px 60px}
+  body.diary{background:#141210}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(120% 55% at 50% 0%, rgba(196,86,94,.07), transparent 62%)}
+  body.diary::before{background:radial-gradient(120% 55% at 50% 0%, rgba(242,236,221,.06), transparent 62%)}
+
+/* 악마 공용 보고서 */
+  .doc{position:relative;z-index:1;max-width:440px;margin:0 auto;background:var(--slab);
+    border:1px solid var(--line);border-radius:2px;padding:22px 20px 18px;overflow:hidden}
+  .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+  .hd .org{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ash);
+    text-transform:uppercase;line-height:1.9}
+  .hd .org b{display:block;font-family:var(--serif);font-weight:700;font-size:15px;
+    letter-spacing:.02em;color:var(--bone);text-transform:none}
+  .stamp{flex:0 0 auto;transform:rotate(-7deg);border:1.5px solid var(--ember);border-radius:2px;
+    padding:5px 9px 4px;text-align:center;opacity:.85;animation:drop .5s cubic-bezier(.2,.9,.3,1.4) both}
+  .stamp .t{font-family:var(--serif);font-weight:700;font-size:11.5px;color:var(--ember);letter-spacing:.1em;line-height:1.3}
+  .stamp .d{font-family:var(--mono);font-size:14px;color:var(--ember);line-height:1.2;margin-top:1px}
+  @keyframes drop{from{opacity:0;transform:rotate(-18deg) scale(1.5)}to{opacity:.85;transform:rotate(-7deg) scale(1)}}
+  .slug{font-family:var(--mono);font-size:11px;color:var(--ash);letter-spacing:.04em;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:9px 0;margin-bottom:16px;line-height:1.9}
+  .slug em{font-style:normal;color:rgba(221,217,208,.82)}
+  .row{display:flex;gap:10px;font-size:12.5px;margin-bottom:7px;align-items:baseline}
+  .row .k{flex:0 0 78px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ash);text-align:right}
+  .row .v{flex:1;color:rgba(221,217,208,.88);line-height:1.7;font-size:13px}
+  .row .v b{font-family:var(--mono);font-weight:400;font-variant-numeric:tabular-nums}
+  .sect{border-top:1px solid var(--line);margin-top:15px;padding-top:15px}
+  .cap{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ash-2);text-transform:uppercase;margin-bottom:10px}
+  .obs{display:flex;gap:10px;font-size:13px;margin-bottom:8px;line-height:1.75}
+  .obs .n{flex:0 0 auto;font-family:var(--mono);font-size:10.5px;color:var(--ash-2);padding-top:3px}
+  .obs .b{flex:1;font-family:var(--serif);color:rgba(221,217,208,.9)}
+  .gauge{margin-bottom:11px}
+  .gauge .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+  .gauge .nm{font-family:var(--serif);font-weight:700;font-size:12.5px}
+  .gauge .no{font-family:var(--mono);font-size:11px;color:var(--ash);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+  .gauge .bar{position:relative;height:2px;background:rgba(221,217,208,.08)}
+  .gauge .zero{position:absolute;top:-2px;bottom:-2px;left:23.07%;width:1px;background:var(--ash-2)}
+  .gauge .fill{position:absolute;top:0;height:2px;background:var(--bone)}
+  .gauge.minus .fill{background:var(--ash-2)}
+  .gauge.high .fill{background:var(--ember)}
+  .flag{margin-top:15px;border-top:1px solid var(--line);padding-top:15px}
+  .flag .ct{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);
+    font-size:11px;color:var(--ember);letter-spacing:.06em;margin-bottom:11px}
+  .flag .ct span:last-child{font-variant-numeric:tabular-nums}
+  .unres{background:var(--inset);border-left:2px solid var(--ember);padding:12px 14px;
+    font-family:var(--serif);font-size:13.5px;line-height:1.8;color:rgba(221,217,208,.92)}
+  .unres .lb{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--ember);margin-bottom:5px}
+  .sign{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;padding-top:12px;
+    border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ash-2)}
+
+/* 하준 일기장 */
+  .diary-pg{position:relative;z-index:1;max-width:440px;margin:0 auto;background:var(--paper);
+    color:var(--graphite);border-radius:1px;padding:20px 20px 24px 46px;
+    background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--rule) 31px 32px);
+    background-position:0 12px;box-shadow:0 1px 0 rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.45)}
+  .diary-pg::before{content:"";position:absolute;left:32px;top:0;bottom:0;width:1px;background:var(--margin);opacity:.5}
+  .diary-pg::after{content:"";position:absolute;right:0;top:0;border:14px solid transparent;
+    border-right-color:#141210;border-top-color:#141210;opacity:.55}
+  .d-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;
+    border-bottom:2px solid var(--graphite);padding-bottom:6px;margin-bottom:16px}
+  .d-hd .dt{font-family:var(--hand);font-weight:700;font-size:19px;line-height:1.5}
+  .d-hd .wx{font-family:var(--hand);font-size:15px;color:var(--pencil);white-space:nowrap}
+  .d-ttl{font-family:var(--hand);font-weight:700;font-size:23px;line-height:32px;margin-bottom:8px}
+  .d-line{font-family:var(--hand);font-size:18px;line-height:32px;color:var(--graphite)}
+  .d-line .no{color:var(--pencil);margin-right:6px}
+  .d-sub{font-family:var(--hand);font-weight:700;font-size:16px;line-height:32px;
+    color:var(--pencil);margin-top:10px;letter-spacing:.02em}
+  .d-ppl{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .d-p{display:flex;align-items:baseline;gap:6px;font-family:var(--hand);font-size:17px;line-height:32px}
+  .d-p .nm{font-weight:700}
+  .d-p .st{color:var(--pencil);font-size:14px}
+  .d-circle{position:relative;font-family:var(--hand);font-size:18px;line-height:31px;
+    color:#A33B36;padding:2px 10px;margin-top:10px;display:inline-block}
+  .d-circle::before{content:"";position:absolute;inset:-4px -6px;border:2px solid #A33B36;
+    border-radius:48% 52% 46% 54%/58% 44% 56% 42%;opacity:.6;transform:rotate(-1.2deg)}
+  .d-foot{font-family:var(--hand);font-size:15px;color:var(--pencil);line-height:32px;margin-top:12px;
+    border-top:1px dashed rgba(74,96,124,.35);padding-top:4px}
+
+  @media (prefers-reduced-motion:reduce){.stamp{animation:none}}
+
+/* 링크 만들기 */
+  .builder{position:relative;z-index:1;max-width:440px;margin:40px auto 0;color:var(--bone)}
+  .builder h2{font-family:var(--serif);font-size:16px;font-weight:700;margin:0 0 6px}
+  .builder .desc{font-size:12.5px;color:var(--ash);margin:0 0 18px;line-height:1.8}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+  .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0 10px}
+  .builder label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ash);margin:0 0 4px}
+  .builder input{width:100%;background:var(--slab);border:1px solid var(--line);border-radius:2px;
+    color:var(--bone);font-family:var(--sans);font-size:12.5px;font-weight:300;padding:8px 9px;margin-bottom:10px}
+  .builder input:focus{outline:1px solid var(--ember);border-color:transparent}
+  .btns{display:flex;gap:8px;margin:4px 0 12px}
+  .btns button{flex:1;padding:10px;border-radius:2px;cursor:pointer;font-family:var(--sans);
+    font-size:13px;border:1px solid var(--line);background:transparent;color:var(--bone)}
+  .btns button.primary{background:var(--bone);color:var(--void);border-color:var(--bone);font-weight:400}
+  .btns button:hover{border-color:rgba(221,217,208,.3)}
+  .btns button:focus-visible,.builder input:focus-visible{outline:2px solid var(--ember);outline-offset:1px}
+  #out{font-family:var(--mono);font-size:10.5px;line-height:1.7;word-break:break-all;color:var(--ash);min-height:52px}
+  .hint{font-family:var(--mono);font-size:10.5px;color:var(--ash);line-height:2;
+    border-top:1px solid var(--line);padding-top:14px;margin-top:4px}
+  .hint b{color:var(--ember);font-weight:400}
+</style>
+</head>
+<body>
+
+<div id="stage"></div>
+
+<div class="builder" id="builder" style="display:none">
+  <h2>링크 만들기</h2>
+  <p class="desc">보고자를 하준으로 바꾸면 일기장으로 바뀐다. 비운 항목은 카드에서 사라진다.</p>
+
+  <div class="g2">
+    <div><label>날짜</label><input id="f-dt" value="2026.08.14"></div>
+    <div><label>요일</label><input id="f-w" value="금"></div>
+    <div><label>시각</label><input id="f-tm" value="23:52"></div>
+    <div><label>관측일차</label><input id="f-dy" value="12"></div>
+  </div>
+  <div class="g2">
+    <div><label>장소</label><input id="f-lc" value="코인 세탁방"></div>
+    <div><label>날씨 (일기장 전용)</label><input id="f-wx" value="열대야 37일째"></div>
+  </div>
+  <div class="g2">
+    <div><label>보고자 (단/라엘/세라/하준)</label><input id="f-rp" value="단"></div>
+    <div><label>나이, 성별</label><input id="f-ag" value="400, 남"></div>
+  </div>
+  <div class="g2">
+    <div><label>접촉 누적</label><input id="f-tc" value="9"></div>
+    <div><label>결론 유예(일)</label><input id="f-dl" value="12"></div>
+  </div>
+  <label>최근 접촉 명목</label><input id="f-tn" value="건조기 진동 중 맥박 변화 측정">
+  <label>관측 사항 1</label><input id="f-o1" value="표본이 세제를 두 번 넣었다. 관측자를 보고 있었기 때문이다.">
+  <label>관측 사항 2</label><input id="f-o2" value="대기 시간 38분. 표본은 그중 31분을 관측자와 대화하는 데 썼다.">
+  <label>관측 사항 3</label><input id="f-o3" value="귀가 동선이 평소보다 길다. 사유 확인 실패.">
+  <div class="g4">
+    <div><label>단</label><input id="f-k" value="46"></div>
+    <div><label>라엘</label><input id="f-r" value="18"></div>
+    <div><label>세라</label><input id="f-s" value="4"></div>
+    <div><label>하준</label><input id="f-h" value="31"></div>
+  </div>
+  <div class="g2">
+    <div><label>분류 불가(건)</label><input id="f-uc" value="7"></div>
+    <div><label>미해결 제목</label><input id="f-ut" value="관측자 측 이상"></div>
+  </div>
+  <label>미해결 항목</label><input id="f-un" value="건조기가 멈춘 뒤에도 관측자가 자리를 뜨지 않음. 측정 명목 없음. 사유란 공란.">
+
+  <div class="btns">
+    <button onclick="preview()">미리보기</button>
+    <button class="primary" onclick="build()">링크 만들기</button>
+  </div>
+  <div id="out">여기에 주소가 나와.</div>
+  <div class="btns"><button onclick="copyOut()">주소 복사</button></div>
+
+  <div class="hint">
+    <b>dt</b> 날짜 · <b>w</b> 요일 · <b>tm</b> 시각 · <b>lc</b> 장소 · <b>dy</b> 관측일차 · <b>wx</b> 날씨<br>
+    <b>rp</b> 보고자 · <b>ag</b> 나이성별 · <b>tc</b> 접촉누적 · <b>tn</b> 최근명목 · <b>dl</b> 유예일수<br>
+    <b>o1 o2 o3</b> 관측사항 · <b>uc</b> 분류불가 건수 · <b>ut</b> 미해결 제목 · <b>un</b> 미해결 내용<br>
+    호감도 <b>k</b> 단 · <b>r</b> 라엘 · <b>s</b> 세라 · <b>h</b> 하준
+  </div>
+</div>
+
+<script>
+const KEYS=['dt','w','tm','lc','wx','dy','rp','ag','tc','tn','dl','o1','o2','o3','k','r','s','h','uc','ut','un'];
+const CAST=[['k','단'],['r','라엘'],['s','세라'],['h','하준']];
+const D_PLUS=[[19,'관측'],[39,'관심'],[59,'이상'],[79,'집착'],[100,'유예']];
+const D_MINUS=[[-23,'애증'],[-15,'서운'],[-8,'뾰로통'],[-1,'삐침']];
+const H_PLUS=[[39,'친구'],[59,'걱정'],[79,'의심'],[100,'개입']];
+const H_MINUS=[[-23,'냉전'],[-15,'삐걱'],[-1,'서운']];
+const DIARY_WORD=[[-15,'요즘 좀 그럼'],[-1,'서먹함'],[19,'그냥 아는 사람'],[39,'괜찮은 편'],
+                  [59,'신경 쓰임'],[79,'거슬림'],[100,'제일 수상함']];
+
+function stage(n,human){
+  if(n>=0){for(const t of (human?H_PLUS:D_PLUS)) if(n<=t[0]) return t[1]; return '유예';}
+  for(const t of (human?H_MINUS:D_MINUS)) if(n<=t[0]) return t[1];
+  return '삐침';
+}
+function diaryWord(n){for(const t of DIARY_WORD) if(n<=t[0]) return t[1]; return '제일 수상함';}
+function grade(n){
+  if(n<=-15) return '접촉 중단';
+  if(n<=-1)  return '요구 없음 · 우연을 가장한 스침';
+  if(n<=19)  return '1 · 측정 목적 한정';
+  if(n<=39)  return '2 · 손목, 손등, 어깨';
+  if(n<=59)  return '3 · 명목이 얇아짐';
+  if(n<=79)  return '4 · 공간 침범, 밀착';
+  return '5 · 제한 없음';
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function clamp(v){return Math.max(-30,Math.min(100,parseInt(v,10)||0))}
+
+function readParams(){
+  const q=location.search.slice(1),d={};
+  if(!q) return d;
+  q.split('&').forEach(p=>{
+    const i=p.indexOf('='); if(i<0) return;
+    let v=p.slice(i+1).replace(/\+/g,' ');
+    try{v=decodeURIComponent(v)}catch(e){}
+    if(v.trim()) d[p.slice(0,i)]=v.trim();
+  });
+  return d;
+}
+
+function drawReport(d){
+  let h='<div class="doc"><div class="hd"><div class="org">DEPT. OF AFFECT RESEARCH<b>수시 관측 보고</b></div>';
+  if(d.dl) h+=`<div class="stamp"><div class="t">결론 유예</div><div class="d">D+${esc(d.dl)}</div></div>`;
+  h+='</div>';
+
+  const slug=[d.dt&&d.dt+(d.w?` (${d.w})`:''),d.tm,d.lc].filter(Boolean).join(' · ');
+  if(slug||d.dy){
+    h+=`<div class="slug">${esc(slug)}`;
+    if(d.dy) h+=`<br>관측 <em>${esc(d.dy)}</em>일차`;
+    if(d.rp) h+=` · 보고자 <em>${esc(d.rp)}</em>${d.ag?` (${esc(d.ag)})`:''}`;
+    h+='</div>';
+  }
+
+  const mine=d.rp==='라엘'?d.r:d.rp==='세라'?d.s:d.k;
+  if(d.tc) h+=`<div class="row"><span class="k">접촉 누적</span><span class="v"><b>${esc(d.tc)}</b>회</span></div>`;
+  if(d.tn) h+=`<div class="row"><span class="k">최근 명목</span><span class="v">${esc(d.tn)}</span></div>`;
+  if(mine!==undefined) h+=`<div class="row"><span class="k">허용 등급</span><span class="v">${grade(clamp(mine))}</span></div>`;
+
+  const obs=[d.o1,d.o2,d.o3].filter(Boolean);
+  if(obs.length){
+    h+='<div class="sect"><div class="cap">주요 관측 사항</div>';
+    obs.forEach((o,i)=>{h+=`<div class="obs"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="b">${esc(o)}</span></div>`});
+    h+='</div>';
+  }
+
+  const gs=CAST.filter(c=>d[c[0]]!==undefined).map(c=>{
+    const n=clamp(d[c[0]]),human=c[0]==='h';
+    const cls=n<0?'minus':(n>=60?'high':'');
+    const z=30/130*100,w=Math.abs(n)/130*100,left=n<0?z-w:z;
+    return `<div class="gauge ${cls}"><div class="top"><span class="nm">${c[1]}</span>
+      <span class="no">${n>0?'+':''}${n} · ${stage(n,human)}</span></div>
+      <div class="bar"><span class="zero"></span><span class="fill" style="left:${left}%;width:${w}%"></span></div></div>`;
+  });
+  if(gs.length) h+=`<div class="sect"><div class="cap">표본 반응 지수</div>${gs.join('')}</div>`;
+
+  if(d.uc||d.un){
+    h+='<div class="flag">';
+    if(d.uc) h+=`<div class="ct"><span>분류 불가 반응</span><span>${esc(d.uc)}건 · 전량 관측자 측 발생</span></div>`;
+    if(d.un) h+=`<div class="unres"><span class="lb">${esc(d.ut||'미해결 항목')}</span>${esc(d.un)}</div>`;
+    h+='</div>';
+  }
+  h+='<div class="sign"><span>미제출</span><span>사유란 공란</span></div></div>';
+  return h;
+}
+
+function drawDiary(d){
+  let h='<div class="diary-pg"><div class="d-hd">';
+  h+=`<div class="dt">${esc(d.dt||'')}${d.w?` ${esc(d.w)}요일`:''}</div>`;
+  if(d.wx) h+=`<div class="wx">${esc(d.wx)}</div>`;
+  h+='</div>';
+
+  const place=[d.lc,d.tm].filter(Boolean).join(' · ');
+  if(place) h+=`<div class="d-ttl">${esc(place)}</div>`;
+
+  const obs=[d.o1,d.o2,d.o3].filter(Boolean);
+  obs.forEach((o,i)=>{h+=`<div class="d-line"><span class="no">${i+1}.</span>${esc(o)}</div>`});
+
+  const ppl=CAST.filter(c=>d[c[0]]!==undefined).map(c=>{
+    const n=clamp(d[c[0]]);
+    return `<div class="d-p"><span class="nm">${c[1]}</span><span class="st">${diaryWord(n)}</span></div>`;
+  });
+  if(ppl.length) h+=`<div class="d-sub">요즘 사람들</div><div class="d-ppl">${ppl.join('')}</div>`;
+
+  if(d.un){
+    h+=`<div class="d-sub">${esc(d.ut||'이상한 점')}</div>`;
+    h+=`<div class="d-circle">${esc(d.un)}</div>`;
+  }
+  if(d.uc) h+=`<div class="d-foot">설명 안 되는 거 ${esc(d.uc)}개째. 전부 나만 신경 쓰는 중.</div>`;
+  else h+='<div class="d-foot">아무한테도 안 보여줄 거임.</div>';
+  h+='</div>';
+  return h;
+}
+
+function draw(d){
+  const diary = d.rp==='하준';
+  document.body.classList.toggle('diary',diary);
+  document.getElementById('stage').innerHTML = diary?drawDiary(d):drawReport(d);
+}
+
+function collect(){
+  const d={};
+  KEYS.forEach(k=>{const el=document.getElementById('f-'+k); if(el&&el.value.trim()) d[k]=el.value.trim()});
+  return d;
+}
+function preview(){draw(collect());window.scrollTo({top:0,behavior:'smooth'})}
+function build(){
+  const d=collect();
+  const qs=KEYS.filter(k=>d[k]).map(k=>k+'='+encodeURIComponent(d[k]).replace(/%20/g,'+')).join('&');
+  document.getElementById('out').textContent=location.origin+location.pathname+'?'+qs;
+}
+function copyOut(){
+  const b=event.target;
+  navigator.clipboard.writeText(document.getElementById('out').textContent).then(()=>{
+    b.textContent='복사됨'; setTimeout(()=>b.textContent='주소 복사',1500);
+  });
+}
+
+const p=readParams();
+if(Object.keys(p).length){ draw(p); }
+else{
+  draw({dt:'2026.08.14',w:'금',tm:'23:52',lc:'코인 세탁방',wx:'열대야 37일째',dy:'12',rp:'단',ag:'400, 남',
+    tc:'9',tn:'건조기 진동 중 맥박 변화 측정',dl:'12',
+    o1:'표본이 세제를 두 번 넣었다. 관측자를 보고 있었기 때문이다.',
+    o2:'대기 시간 38분. 표본은 그중 31분을 관측자와 대화하는 데 썼다.',
+    o3:'귀가 동선이 평소보다 길다. 사유 확인 실패.',
+    k:'46',r:'18',s:'4',h:'31',uc:'7',ut:'관측자 측 이상',
+    un:'건조기가 멈춘 뒤에도 관측자가 자리를 뜨지 않음. 측정 명목 없음. 사유란 공란.'});
+  document.getElementById('builder').style.display='block';
+}
+</script>
+</body>
+</html>
