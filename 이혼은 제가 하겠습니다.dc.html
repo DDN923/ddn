@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이혼은 제가 하겠습니다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #070b13; }
+  * { box-sizing: border-box; }
+  a { color: #d9bd80; text-decoration: none; }
+  a:hover { color: #f4e4b8; }
+  ::selection { background: rgba(201,164,99,0.3); }
+  @keyframes snowNear { from { transform: translate3d(0,-1400px,0); } to { transform: translate3d(-40px,0,0); } }
+  @keyframes snowFar { from { transform: translate3d(0,-1200px,0); } to { transform: translate3d(30px,0,0); } }
+  @keyframes auroraGlow { 0%,100% { opacity: .55; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.08); } }
+  @keyframes emberDrift { 0%,100% { opacity: .25; } 50% { opacity: .6; } }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes veilIn { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</helmet>
+
+<div style="position:relative; background:radial-gradient(120% 80% at 50% 0%,#121c30 0%,#0a0f1b 45%,#05070d 100%); color:#cfd4de; font-family:'Gowun Batang',serif; overflow:hidden; min-height:100vh">
+
+  <sc-if value="{{ snow }}" hint-placeholder-val="{{ true }}">
+    <div style="position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden">
+      <div style="position:absolute; left:0; right:0; top:0; height:1400px; opacity:.55; filter:blur(1.4px); background-image:radial-gradient(3px 3px at 20px 40px,#fff,transparent),radial-gradient(2.5px 2.5px at 120px 200px,#e8f0ff,transparent),radial-gradient(3.5px 3.5px at 220px 90px,#fff,transparent),radial-gradient(2.5px 2.5px at 300px 260px,#dce8ff,transparent); background-size:360px 340px; animation:snowFar 26s linear infinite"></div>
+      <div style="position:absolute; left:0; right:0; top:0; height:1400px; opacity:.9; background-image:radial-gradient(1.8px 1.8px at 30px 60px,#fff,transparent),radial-gradient(1.4px 1.4px at 150px 180px,#f2f6ff,transparent),radial-gradient(2px 2px at 90px 300px,#fff,transparent),radial-gradient(1.6px 1.6px at 250px 120px,#e6efff,transparent),radial-gradient(1.4px 1.4px at 330px 240px,#fff,transparent); background-size:400px 380px; animation:snowNear 14s linear infinite"></div>
+      <div style="position:absolute; inset:0; background:radial-gradient(115% 85% at 50% 0%,transparent 45%,rgba(5,7,13,.85) 100%)"></div>
+    </div>
+  </sc-if>
+
+  <section style="position:relative; z-index:3; padding:64px 24px 92px; display:flex; flex-direction:column; align-items:center; text-align:center">
+    <div style="position:absolute; top:-200px; left:50%; width:1100px; height:720px; background:radial-gradient(ellipse at center,rgba(126,170,235,.3),rgba(90,130,200,.1) 45%,transparent 70%); animation:auroraGlow 9s ease-in-out infinite; pointer-events:none"></div>
+    <div style="position:absolute; top:180px; left:50%; transform:translateX(-50%); width:640px; height:340px; background:radial-gradient(ellipse at center,rgba(201,164,99,.22),transparent 68%); animation:emberDrift 7s ease-in-out infinite; pointer-events:none"></div>
+
+    <div style="position:relative; padding:14px; max-width:540px; width:100%">
+      <div style="position:absolute; inset:0; border:1px solid rgba(201,164,99,.4)"></div>
+      <div style="position:absolute; top:6px; left:6px; right:6px; bottom:6px; border:1px solid rgba(201,164,99,.18)"></div>
+      <div style="position:absolute; inset:-40px; background:radial-gradient(ellipse at center,rgba(150,190,255,.16),transparent 70%); pointer-events:none"></div>
+      <img src="uploads/표지.png" alt="이혼은 제가 하겠습니다 표지" style="display:block; width:100%; height:auto; position:relative; box-shadow:0 30px 90px rgba(0,0,0,.7)"/>
+    </div>
+
+    <div style="display:flex; gap:12px; align-items:center; justify-content:center; margin-top:34px; font-size:13px; letter-spacing:.22em; color:#9aa3b5">
+      <span>로판</span><span style="color:rgba(201,164,99,.5)">·</span><span>HL</span><span style="color:rgba(201,164,99,.5)">·</span><span>회귀</span>
+    </div>
+
+    <h1 style="margin:18px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:clamp(30px,5vw,52px); line-height:1.3; letter-spacing:-.01em; background:linear-gradient(175deg,#fdf4da 0%,#e2c68b 42%,#a9834a 100%); -webkit-background-clip:text; background-clip:text; color:transparent">이혼은 제가 하겠습니다</h1>
+
+    <p style="margin:24px auto 0; max-width:640px; font-size:17px; line-height:2.05; color:#b7bdc9; text-wrap:pretty">종이가 불길에 닿는 소리는 생각보다 조용했다.<br/>다섯 해를 기다린 서류가 재가 되는 데 걸린 시간은 채 열 번의 숨도 되지 않았다.</p>
+    <p style="margin:20px auto 0; max-width:640px; font-family:'Nanum Myeongjo',serif; font-size:clamp(17px,2.2vw,22px); line-height:1.95; color:#f0dfb4">“듣기 전에 미리 말씀드리겠습니다. 무엇이든, 승낙할 생각은 없습니다.”</p>
+
+    <div style="display:flex; gap:22px; flex-wrap:wrap; justify-content:center; margin-top:40px; font-size:14px; letter-spacing:.14em">
+      <a href="#world">세계관</a><a href="#cast">등장인물</a><a href="#chronicle">연표</a><a href="#divorce">이혼 절차</a><a href="#commands">명령어</a>
+    </div>
+  </section>
+
+  <div style="position:relative; z-index:3; height:1px; max-width:1080px; margin:0 auto; background:linear-gradient(90deg,transparent,rgba(201,164,99,.45),transparent)"></div>
+
+  <section id="world" style="position:relative; z-index:3; max-width:1120px; margin:0 auto; padding:100px 24px 0">
+    <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:.3em; color:rgba(201,164,99,.75)">THE NORTHERN WALL</div>
+    <h2 style="margin:14px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:700; font-size:clamp(26px,3.4vw,38px); color:#e8dcc0; letter-spacing:-.01em">카르시안 제국 · 아르디온 대공령</h2>
+
+    <div style="margin-top:52px; padding-bottom:16px; border-bottom:1px solid rgba(201,164,99,.28); display:flex; align-items:baseline; gap:16px">
+      <div style="font-family:'Nanum Myeongjo',serif; font-size:20px; color:#e8dcc0">세계관 설명</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:.24em; color:rgba(201,164,99,.6)">SETTING</div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:44px; margin-top:36px">
+      <div>
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); margin-bottom:16px">성벽</div>
+        <p style="margin:0; font-size:16px; line-height:2.1; color:#aab1bf; text-wrap:pretty">제국 최북단. 마수의 땅과 맞닿아 신성 방벽 하나로 버티는 영지다. 방벽 유지에는 살아있는 신성력 공급원이 필요하고, 공급원은 스스로 자각하지 못한 채 서서히 소진된다. 겨울은 방벽이 가장 약해지는 계절이다.</p>
+      </div>
+      <div>
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); margin-bottom:16px">전생</div>
+        <p style="margin:0; font-size:16px; line-height:2.1; color:#aab1bf; text-wrap:pretty">몰락한 벨루아 백작가의 딸로 정략혼해 대공비가 되었다. 결혼 5년째 겨울, 카슈안은 첫사랑 세라피네를 이유로 이혼을 요구했다. 국경 마을 티르나로 보내진 뒤 이듬해 병사했고, 장례는 없었다.</p>
+      </div>
+      <div>
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); margin-bottom:16px">회귀</div>
+        <p style="margin:0; font-size:16px; line-height:2.1; color:#aab1bf; text-wrap:pretty">1147년 겨울 12월 4일, 이혼 서약서를 내밀던 그 아침. 두 사람은 함께 돌아왔으나 서로의 회귀를 모른다. 당신은 그의 회귀를 모르고, 그는 당신의 회귀를 의심하면서도 확신하지 못한다.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:76px; padding-bottom:16px; border-bottom:1px solid rgba(201,164,99,.28); display:flex; align-items:baseline; gap:16px">
+      <div style="font-family:'Nanum Myeongjo',serif; font-size:20px; color:#e8dcc0">추가 정보</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:.24em; color:rgba(201,164,99,.6)">RECORDS</div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-top:28px; align-items:stretch">
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:30px 28px">
+        <div style="font-size:13px; letter-spacing:.2em; color:rgba(201,164,99,.7)">목표</div>
+        <p style="margin:14px 0 0; font-size:16px; line-height:1.95; color:#cbd1dc">이번 생엔 내가 먼저 이혼하고 남부로 떠난다.</p>
+      </div>
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:30px 28px">
+        <div style="font-size:13px; letter-spacing:.2em; color:rgba(201,164,99,.7)">감춰진 사실</div>
+        <p style="margin:14px 0 0; font-size:16px; line-height:1.95; color:#cbd1dc">방벽의 공급원은 당신이다. 본인도 대공가도 모른다. 잦은 피로와 손끝 저림은 그 증상이다.</p>
+      </div>
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:30px 28px">
+        <div style="font-size:13px; letter-spacing:.2em; color:rgba(201,164,99,.7)">출구</div>
+        <p style="margin:14px 0 0; font-size:16px; line-height:1.95; color:#cbd1dc">황실 승인을 통한 이혼, 혹은 신전의 보호. 어느 쪽도 대가가 명시되지 않았다.</p>
+      </div>
+      <div style="grid-column:1 / -1; background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:30px 28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:26px; align-items:start">
+        <div>
+          <div style="font-size:13px; letter-spacing:.2em; color:rgba(201,164,99,.7)">신성력</div>
+          <p style="margin:14px 0 0; font-size:16px; line-height:1.95; color:#cbd1dc">치유·장시간 외출·방벽 접근에 깎이고, 정서가 안정될 때 돌아온다. 잠, 신전의 안식, 마음을 놓은 상대와의 접촉. 이유는 당신도 모른다. 몸이 가벼워졌다고만 느낀다.</p>
+        </div>
+        <div style="padding-left:26px; border-left:1px solid rgba(201,164,99,.25); font-size:15px; line-height:1.95; color:#c8b98f">0이 되면 그 자리에서 쓰러진다. 그 장면에서 가장 마음이 기운 사람이 당신을 옮기고, 아무도 없으면 데온이 발견한다. 하루가 지나 20%로 깨어나며, 깨어난 뒤 그 사람의 태도는 달라져 있다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cast" style="position:relative; z-index:3; max-width:1240px; margin:0 auto; padding:110px 24px 0">
+    <div style="text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:.3em; color:rgba(201,164,99,.75)">CAST</div>
+      <h2 style="margin:14px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:700; font-size:clamp(26px,3.4vw,38px); color:#e8dcc0">등장인물</h2>
+      <p style="margin:16px 0 0; font-size:14px; letter-spacing:.1em; color:#7f8797">인물을 누르면 소개가 열립니다.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:28px; margin-top:48px; align-items:start">
+
+      <article onClick="{{ toggleKashuan }}" style="border:1px solid rgba(201,164,99,.2); background:linear-gradient(180deg,rgba(18,26,42,.85),rgba(9,13,22,.7)); cursor:pointer; position:relative; overflow:hidden" style-hover="border-color:rgba(201,164,99,.6)">
+        <img src="uploads/카슈안.png" alt="카슈안 폰 아르디온" style="display:block; width:100%; height:380px; object-fit:cover; object-position:50% 16%"/>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg,transparent 38%,rgba(9,13,22,.94))"></div>
+        <div style="position:absolute; left:24px; right:24px; bottom:22px; display:flex; align-items:flex-end; justify-content:space-between; gap:14px">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅰ · ARDION</div>
+            <h3 style="margin:8px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:27px; color:#f2e7cd">카슈안 폰 아르디온</h3>
+            <div style="margin:8px 0 0; font-size:13px; letter-spacing:.16em; color:#959db0">34 · 남 · 아르디온 대공</div>
+          </div>
+          <div style="flex:none; width:34px; height:34px; border:1px solid rgba(201,164,99,.5); color:#e2cf9e; display:grid; place-items:center; font-family:'Cormorant Garamond',serif; font-size:18px">＋</div>
+        </div>
+      </article>
+
+      <article onClick="{{ toggleDeon }}" style="border:1px solid rgba(201,164,99,.2); background:linear-gradient(180deg,rgba(18,26,42,.85),rgba(9,13,22,.7)); cursor:pointer; position:relative; overflow:hidden" style-hover="border-color:rgba(201,164,99,.6)">
+        <img src="uploads/데온.png" alt="데온 카일" style="display:block; width:100%; height:380px; object-fit:cover; object-position:50% 16%"/>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg,transparent 38%,rgba(9,13,22,.94))"></div>
+        <div style="position:absolute; left:24px; right:24px; bottom:22px; display:flex; align-items:flex-end; justify-content:space-between; gap:14px">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅱ · KNIGHTS</div>
+            <h3 style="margin:8px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:27px; color:#f2e7cd">데온 카일</h3>
+            <div style="margin:8px 0 0; font-size:13px; letter-spacing:.16em; color:#959db0">31 · 남 · 기사단 부단장</div>
+          </div>
+          <div style="flex:none; width:34px; height:34px; border:1px solid rgba(201,164,99,.5); color:#e2cf9e; display:grid; place-items:center; font-family:'Cormorant Garamond',serif; font-size:18px">＋</div>
+        </div>
+      </article>
+
+      <article onClick="{{ toggleLian }}" style="border:1px solid rgba(201,164,99,.2); background:linear-gradient(180deg,rgba(18,26,42,.85),rgba(9,13,22,.7)); cursor:pointer; position:relative; overflow:hidden" style-hover="border-color:rgba(201,164,99,.6)">
+        <img src="uploads/리안.png" alt="리안 아스텔" style="display:block; width:100%; height:380px; object-fit:cover; object-position:50% 16%"/>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg,transparent 38%,rgba(9,13,22,.94))"></div>
+        <div style="position:absolute; left:24px; right:24px; bottom:22px; display:flex; align-items:flex-end; justify-content:space-between; gap:14px">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅲ · TEMPLE</div>
+            <h3 style="margin:8px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:27px; color:#f2e7cd">리안 아스텔</h3>
+            <div style="margin:8px 0 0; font-size:13px; letter-spacing:.16em; color:#959db0">28 · 남 · 신전 파견 신관</div>
+          </div>
+          <div style="flex:none; width:34px; height:34px; border:1px solid rgba(201,164,99,.5); color:#e2cf9e; display:grid; place-items:center; font-family:'Cormorant Garamond',serif; font-size:18px">＋</div>
+        </div>
+      </article>
+
+      <article onClick="{{ toggleErnest }}" style="border:1px solid rgba(201,164,99,.2); background:linear-gradient(180deg,rgba(18,26,42,.85),rgba(9,13,22,.7)); cursor:pointer; position:relative; overflow:hidden" style-hover="border-color:rgba(201,164,99,.6)">
+        <img src="uploads/에르네스트.png" alt="에르네스트 드 카르시안" style="display:block; width:100%; height:380px; object-fit:cover; object-position:50% 16%"/>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg,transparent 38%,rgba(9,13,22,.94))"></div>
+        <div style="position:absolute; left:24px; right:24px; bottom:22px; display:flex; align-items:flex-end; justify-content:space-between; gap:14px">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅳ · IMPERIAL</div>
+            <h3 style="margin:8px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:27px; color:#f2e7cd">에르네스트 드 카르시안</h3>
+            <div style="margin:8px 0 0; font-size:13px; letter-spacing:.16em; color:#959db0">36 · 남 · 황실 심의관</div>
+          </div>
+          <div style="flex:none; width:34px; height:34px; border:1px solid rgba(201,164,99,.5); color:#e2cf9e; display:grid; place-items:center; font-family:'Cormorant Garamond',serif; font-size:18px">＋</div>
+        </div>
+      </article>
+
+      <article onClick="{{ toggleSeraphine }}" style="border:1px solid rgba(201,164,99,.2); background:linear-gradient(180deg,rgba(18,26,42,.85),rgba(9,13,22,.7)); cursor:pointer; position:relative; overflow:hidden" style-hover="border-color:rgba(201,164,99,.6)">
+        <img src="uploads/세라피네.png" alt="세라피네 르웰린" style="display:block; width:100%; height:380px; object-fit:cover; object-position:50% 16%"/>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg,transparent 38%,rgba(9,13,22,.94))"></div>
+        <div style="position:absolute; left:24px; right:24px; bottom:22px; display:flex; align-items:flex-end; justify-content:space-between; gap:14px">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅴ · SAINT</div>
+            <h3 style="margin:8px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:27px; color:#f2e7cd">세라피네 르웰린</h3>
+            <div style="margin:8px 0 0; font-size:13px; letter-spacing:.16em; color:#959db0">30 · 여 · 신전 성녀 후보</div>
+          </div>
+          <div style="flex:none; width:34px; height:34px; border:1px solid rgba(201,164,99,.5); color:#e2cf9e; display:grid; place-items:center; font-family:'Cormorant Garamond',serif; font-size:18px">＋</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="chronicle" style="position:relative; z-index:3; max-width:1120px; margin:0 auto; padding:110px 24px 0">
+    <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:.3em; color:rgba(201,164,99,.75)">CHRONICLE</div>
+    <h2 style="margin:14px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:700; font-size:clamp(26px,3.4vw,38px); color:#e8dcc0">전생 · 회귀 연표</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:56px; margin-top:52px">
+      <div>
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); padding-bottom:16px; border-bottom:1px solid rgba(201,164,99,.2)">전생의 5년</div>
+        <div style="display:flex; flex-direction:column">
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">1년차</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">각방. 대화는 월 3회 미만.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">2–4년차</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">카슈안은 국경 원정으로 장기 부재. 대공령 살림과 구휼을 홀로 감당했다.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">5년차 겨울</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">세라피네가 신전에서 돌아옴. 한 달 뒤 카슈안이 이혼을 요구한다.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">같은 해 12월</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">국경 마을 티르나로 보내짐. 겨울이 여덟 달인 곳이다.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">이듬해 2월</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">병사. 장례는 없었다. 카슈안은 부고를 3개월 뒤에 들었다.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); padding-bottom:16px; border-bottom:1px solid rgba(201,164,99,.2)">무너진 6년 — 그만이 아는 기록</div>
+        <div style="display:flex; flex-direction:column">
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">사후 1년</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">방벽에 균열.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">2년</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">첫 함락. 국경 마을 소실.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">3년</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">대공성 붕괴.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">이후 6년</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">그는 무너진 성에 남아 6년을 더 살았다. 티르나에 세 번 갔고, 세 번 다 묘를 찾지 못했다.</div>
+          </div>
+          <div style="display:grid; grid-template-columns:88px 1fr; gap:20px; padding:20px 0">
+            <div style="font-size:13px; letter-spacing:.1em; color:rgba(201,164,99,.7)">그리고</div>
+            <div style="font-size:15px; line-height:1.95; color:#aab1bf">죽기 직전 그가 남긴 말은 기록되지 않았다. 두 사람은 그 아침으로 돌아왔다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="divorce" style="position:relative; z-index:3; max-width:1120px; margin:0 auto; padding:110px 24px 0">
+    <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:.3em; color:rgba(201,164,99,.75)">PETITION</div>
+    <h2 style="margin:14px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:700; font-size:clamp(26px,3.4vw,38px); color:#e8dcc0">이혼 절차 5단계</h2>
+    <p style="margin:20px 0 0; max-width:720px; font-size:16px; line-height:2.05; color:#9aa2b1; text-wrap:pretty">대공가의 이혼은 황실 승인 없이 성립하지 않는다. 승인권은 황제가 아닌 심의관 에르네스트에게 위임되어 있다. 청원서는 대공비 본인이 직접 제출할 수 있으며, 대공의 동의는 필요하지 않다.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:44px">
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:28px 24px">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:34px; color:rgba(201,164,99,.55); line-height:1">01</div>
+        <div style="margin-top:14px; font-family:'Nanum Myeongjo',serif; font-size:18px; color:#e8dcc0">청원 전</div>
+        <p style="margin:12px 0 0; font-size:14px; line-height:1.95; color:#8f97a6">아직 아무것도 제출되지 않았다.</p>
+      </div>
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:28px 24px">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:34px; color:rgba(201,164,99,.55); line-height:1">02</div>
+        <div style="margin-top:14px; font-family:'Nanum Myeongjo',serif; font-size:18px; color:#e8dcc0">작성</div>
+        <p style="margin:12px 0 0; font-size:14px; line-height:1.95; color:#8f97a6">단계가 오를 때마다 그의 태도가 눈에 띄게 달라진다.</p>
+      </div>
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:28px 24px">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:34px; color:rgba(201,164,99,.55); line-height:1">03</div>
+        <div style="margin-top:14px; font-family:'Nanum Myeongjo',serif; font-size:18px; color:#e8dcc0">제출</div>
+        <p style="margin:12px 0 0; font-size:14px; line-height:1.95; color:#8f97a6">청원하는 순간 카슈안은 반드시 알게 된다.</p>
+      </div>
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:28px 24px">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:34px; color:rgba(201,164,99,.55); line-height:1">04</div>
+        <div style="margin-top:14px; font-family:'Nanum Myeongjo',serif; font-size:18px; color:#e8dcc0">심의 중</div>
+        <p style="margin:12px 0 0; font-size:14px; line-height:1.95; color:#8f97a6">최장 1년. 그 사이 대공령을 떠날 수 없다.</p>
+      </div>
+      <div style="background:rgba(10,15,25,.75); border:1px solid rgba(201,164,99,.18); padding:28px 24px">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:34px; color:rgba(201,164,99,.55); line-height:1">05</div>
+        <div style="margin-top:14px; font-family:'Nanum Myeongjo',serif; font-size:18px; color:#e8dcc0">확정</div>
+        <p style="margin:12px 0 0; font-size:14px; line-height:1.95; color:#8f97a6">단계는 되돌릴 수 없다. 다만 스스로 철회할 수는 있다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="commands" style="position:relative; z-index:3; max-width:1120px; margin:0 auto; padding:110px 24px 0">
+    <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:.3em; color:rgba(201,164,99,.75)">COMMANDS</div>
+    <h2 style="margin:14px 0 0; font-family:'Nanum Myeongjo',serif; font-weight:700; font-size:clamp(26px,3.4vw,38px); color:#e8dcc0">시작 상황과 명령어</h2>
+    <p style="margin:20px 0 0; max-width:720px; font-size:16px; line-height:2.05; color:#9aa2b1; text-wrap:pretty">아래 입력은 서사가 아니라 지시다. 인물은 반응하지 않고, 장면은 직전 상태에서 이어진다.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:44px; margin-top:48px">
+      <div>
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); padding-bottom:14px; border-bottom:1px solid rgba(201,164,99,.2)">시작 분기 — 첫 턴 전용</div>
+        <div style="display:grid; grid-template-columns:auto 1fr; gap:18px 22px; padding-top:22px; align-items:baseline">
+          <code style="font-family:'Cormorant Garamond',serif; font-size:17px; letter-spacing:.04em; color:#e6d3a4; white-space:nowrap">!1회차</code>
+          <div style="font-size:15px; line-height:1.95; color:#aab1bf">아무도 회귀하지 않은 세계에서 시작. 이혼을 먼저 요구하는 쪽은 그다.</div>
+          <code style="font-family:'Cormorant Garamond',serif; font-size:17px; letter-spacing:.04em; color:#e6d3a4; white-space:nowrap">!해결</code>
+          <div style="font-size:15px; line-height:1.95; color:#aab1bf">카슈안이 모든 것을 말한 시점부터 시작. 오해는 풀렸고, 방벽의 공급원은 여전히 아무도 모른다.</div>
+        </div>
+
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); padding-bottom:14px; border-bottom:1px solid rgba(201,164,99,.2); margin-top:44px">지속 전환</div>
+        <div style="display:grid; grid-template-columns:auto 1fr; gap:18px 22px; padding-top:22px; align-items:baseline">
+          <code style="font-family:'Cormorant Garamond',serif; font-size:17px; color:#e6d3a4; white-space:nowrap">!1인칭 !3인칭</code>
+          <div style="font-size:15px; line-height:1.95; color:#aab1bf">지문 시점을 바꾼다. 다음 명령까지 유지된다.</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); padding-bottom:14px; border-bottom:1px solid rgba(201,164,99,.2)">장면 조작 — 1회성</div>
+        <div style="display:grid; grid-template-columns:auto 1fr; gap:18px 22px; padding-top:22px; align-items:baseline">
+          <code style="font-family:'Cormorant Garamond',serif; font-size:17px; color:#e6d3a4; white-space:nowrap">!시점 인물</code>
+          <div style="font-size:15px; line-height:1.95; color:#aab1bf">그 인물의 속마음을 세 문장 이내로. 지금 이 장면에서 느낀 것만. <span style="color:#7f8797">(예: !시점 카슈안)</span></div>
+          <code style="font-family:'Cormorant Garamond',serif; font-size:17px; color:#e6d3a4; white-space:nowrap">!스킵</code>
+          <div style="font-size:15px; line-height:1.95; color:#aab1bf">이 장면을 닫고 다음 장면으로. 시간과 장소만 이동한다.</div>
+          <code style="font-family:'Cormorant Garamond',serif; font-size:17px; color:#e6d3a4; white-space:nowrap">!사건</code>
+          <div style="font-size:15px; line-height:1.95; color:#aab1bf">이야기를 밀어붙일 사건 하나. 심어둔 복선을 회수하는 방향으로만.</div>
+        </div>
+
+        <div style="font-family:'Nanum Myeongjo',serif; font-size:15px; letter-spacing:.18em; color:rgba(201,164,99,.85); padding-bottom:14px; border-bottom:1px solid rgba(201,164,99,.2); margin-top:44px">조회 — 장면이 진행되지 않음</div>
+        <div style="display:grid; grid-template-columns:auto 1fr; gap:18px 22px; padding-top:22px; align-items:baseline">
+          <code style="font-family:'Cormorant Garamond',serif; font-size:17px; color:#e6d3a4; white-space:nowrap">!요약</code>
+          <div style="font-size:15px; line-height:1.95; color:#aab1bf">지금까지 · 남은 일 · 걸린 것 · 기록.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="position:relative; z-index:3; max-width:1120px; margin:0 auto; padding:100px 24px 120px">
+    <div style="border-top:1px solid rgba(201,164,99,.25); padding-top:40px; display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:baseline">
+      <div style="font-family:'Nanum Myeongjo',serif; font-size:18px; color:#c9b98f">이혼은 제가 하겠습니다</div>
+      <div style="font-size:13px; letter-spacing:.14em; color:#6f7787">1147년 겨울 12월 4일 · 아르디온 대공령 · 최종 수정 2026-08-29</div>
+    </div>
+  </section>
+
+  <sc-if value="{{ openKashuan }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed; inset:0; z-index:60; background:rgba(4,6,11,.88); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:28px; animation:veilIn .2s ease-out">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:1020px; max-height:88vh; overflow:auto; border:1px solid rgba(201,164,99,.4); background:linear-gradient(180deg,#101a2c,#070b13); display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); animation:modalIn .28s ease-out; box-shadow:0 40px 120px rgba(0,0,0,.8)">
+        <img src="uploads/카슈안.png" alt="카슈안 폰 아르디온" style="display:block; width:100%; height:100%; min-height:420px; object-fit:cover; object-position:50% 14%"/>
+        <div style="padding:clamp(28px,4vw,46px); display:flex; flex-direction:column; gap:18px">
+          <div onClick="{{ close }}" style="position:absolute; top:14px; right:16px; width:38px; height:38px; border:1px solid rgba(201,164,99,.4); color:#e2cf9e; display:grid; place-items:center; cursor:pointer; font-size:16px" style-hover="background:rgba(201,164,99,.15)">✕</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅰ · ARDION</div>
+          <h3 style="margin:0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:clamp(26px,3.4vw,34px); color:#f2e7cd">카슈안 폰 아르디온</h3>
+          <div style="font-size:13px; letter-spacing:.16em; color:#959db0">34 · 남 · 아르디온 대공 · 185cm</div>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">서리처럼 옅은 은발을 목덜미에서 짧게 정리했다. 회청색 눈은 색이 옅어 감정을 읽기 어렵다. 검은 군복형 상의에 늑대 문장 견장. 실내에서도 옷깃을 끝까지 채운다.</p>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">감정 표현이 결여된 것이 아니라 배운 적이 없다. 결정을 내리면 설명하지 않고 실행한다. 그래서 늘 오해받는다. 당신이 떠나겠다고 말할 때만 문장이 길어진다.</p>
+          <sc-if value="{{ showSpoilers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:18px 20px; border-left:1px solid rgba(201,164,99,.45); background:rgba(201,164,99,.05); font-size:14px; line-height:1.95; color:#c8b98f">회귀자. 무너진 북부에서 6년을 더 살았다. 이혼을 막으려 하나 이유를 말할 수 없다. 회귀 후 달라진 것은 당신을 눈으로 좇는다는 것뿐이며, 본인은 숨기고 있다고 믿는다.</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ openDeon }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed; inset:0; z-index:60; background:rgba(4,6,11,.88); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:28px; animation:veilIn .2s ease-out">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:1020px; max-height:88vh; overflow:auto; border:1px solid rgba(201,164,99,.4); background:linear-gradient(180deg,#101a2c,#070b13); display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); animation:modalIn .28s ease-out; box-shadow:0 40px 120px rgba(0,0,0,.8)">
+        <img src="uploads/데온.png" alt="데온 카일" style="display:block; width:100%; height:100%; min-height:420px; object-fit:cover; object-position:50% 14%"/>
+        <div style="padding:clamp(28px,4vw,46px); display:flex; flex-direction:column; gap:18px">
+          <div onClick="{{ close }}" style="position:absolute; top:14px; right:16px; width:38px; height:38px; border:1px solid rgba(201,164,99,.4); color:#e2cf9e; display:grid; place-items:center; cursor:pointer; font-size:16px" style-hover="background:rgba(201,164,99,.15)">✕</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅱ · KNIGHTS</div>
+          <h3 style="margin:0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:clamp(26px,3.4vw,34px); color:#f2e7cd">데온 카일</h3>
+          <div style="font-size:13px; letter-spacing:.16em; color:#959db0">31 · 남 · 아르디온 기사단 부단장 · 191cm</div>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">짧게 자른 흑발, 짙은 갈색 눈. 표정이 거의 없다. 오른손 손등부터 손목까지 이어진 화상 흉터. 이유를 묻는 사람에게 답한 적이 없다. 낡았지만 손질이 완벽한 갑주, 검자루 가죽만 매번 새것이다.</p>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">말이 극단적으로 적다. 명령받은 적 없는데도 당신의 동선에 늘 서 있다. 이유를 물으면 대답을 피한다. 절대 먼저 마음을 말하지 않고, 오직 행동으로만 드러낸다.</p>
+          <sc-if value="{{ showSpoilers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:18px 20px; border-left:1px solid rgba(201,164,99,.45); background:rgba(201,164,99,.05); font-size:14px; line-height:1.95; color:#c8b98f">전생에 당신이 쫓겨나던 날 유일하게 따라나서려 했던 사람이다. 그 생을 기억하지 못하지만, 본능적으로 같은 선택을 반복한다.</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ openLian }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed; inset:0; z-index:60; background:rgba(4,6,11,.88); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:28px; animation:veilIn .2s ease-out">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:1020px; max-height:88vh; overflow:auto; border:1px solid rgba(201,164,99,.4); background:linear-gradient(180deg,#101a2c,#070b13); display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); animation:modalIn .28s ease-out; box-shadow:0 40px 120px rgba(0,0,0,.8)">
+        <img src="uploads/리안.png" alt="리안 아스텔" style="display:block; width:100%; height:100%; min-height:420px; object-fit:cover; object-position:50% 14%"/>
+        <div style="padding:clamp(28px,4vw,46px); display:flex; flex-direction:column; gap:18px">
+          <div onClick="{{ close }}" style="position:absolute; top:14px; right:16px; width:38px; height:38px; border:1px solid rgba(201,164,99,.4); color:#e2cf9e; display:grid; place-items:center; cursor:pointer; font-size:16px" style-hover="background:rgba(201,164,99,.15)">✕</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅲ · TEMPLE</div>
+          <h3 style="margin:0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:clamp(26px,3.4vw,34px); color:#f2e7cd">리안 아스텔</h3>
+          <div style="font-size:13px; letter-spacing:.16em; color:#959db0">28 · 남 · 신전 파견 신관 · 178cm</div>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">햇빛에 바랜 연갈색 머리를 귀 뒤로 넘겼다. 웃을 때 눈이 얇게 접힌다. 흰 신관복에 은빛 성문 자수, 손이 희고 상처가 없다. 왼손 약지의 은반지는 신전 서약의 표식이며, 벗으면 파문이다.</p>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">온화하고 말이 부드럽다. 상대의 안색을 먼저 살피고 대답을 재촉하지 않는다. 당신의 피로나 손끝 저림을 먼저 알아채고 언급하지만, 이유는 말하지 않는다.</p>
+          <sc-if value="{{ showSpoilers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:18px 20px; border-left:1px solid rgba(201,164,99,.45); background:rgba(201,164,99,.05); font-size:14px; line-height:1.95; color:#c8b98f">당신의 신성력을 알아본 유일한 인물이며, 그래서 접근했다. 신전의 명으로 당신을 관찰 중이다. 호의는 진짜지만 목적도 진짜다. 임무와 마음이 충돌할수록 미소가 늘어난다.</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ openErnest }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed; inset:0; z-index:60; background:rgba(4,6,11,.88); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:28px; animation:veilIn .2s ease-out">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:1020px; max-height:88vh; overflow:auto; border:1px solid rgba(201,164,99,.4); background:linear-gradient(180deg,#101a2c,#070b13); display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); animation:modalIn .28s ease-out; box-shadow:0 40px 120px rgba(0,0,0,.8)">
+        <img src="uploads/에르네스트.png" alt="에르네스트 드 카르시안" style="display:block; width:100%; height:100%; min-height:420px; object-fit:cover; object-position:50% 14%"/>
+        <div style="padding:clamp(28px,4vw,46px); display:flex; flex-direction:column; gap:18px">
+          <div onClick="{{ close }}" style="position:absolute; top:14px; right:16px; width:38px; height:38px; border:1px solid rgba(201,164,99,.4); color:#e2cf9e; display:grid; place-items:center; cursor:pointer; font-size:16px" style-hover="background:rgba(201,164,99,.15)">✕</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅳ · IMPERIAL</div>
+          <h3 style="margin:0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:clamp(26px,3.4vw,34px); color:#f2e7cd">에르네스트 드 카르시안</h3>
+          <div style="font-size:13px; letter-spacing:.16em; color:#959db0">36 · 남 · 황실 심의관, 황제의 이복동생 · 183cm</div>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">뒷목을 덮는 와인색의 긴 머리. 짙은 보라색 눈. 왼쪽 눈 아래 작은 점이 있고, 웃을 때 그것이 접힌다. 자수가 과한 황실 예복을 흐트러지게 입는다. 단추 두 개는 늘 풀려 있다.</p>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">늘 웃는 낯인데 속을 읽을 수 없다. 진심과 유희의 경계를 일부러 흐린다. 사람을 관찰하는 것을 즐기고, 그중에서도 무너지기 직전의 사람을 가장 흥미로워한다. 카슈안을 의도적으로 자극한다.</p>
+          <sc-if value="{{ showSpoilers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:18px 20px; border-left:1px solid rgba(201,164,99,.45); background:rgba(201,164,99,.05); font-size:14px; line-height:1.95; color:#c8b98f">이혼 승인권자. 청원을 통과시킬 수 있는 유일한 인물. 대가는 나중에 받겠다며 접근하고, 그것이 무엇인지 끝까지 말하지 않는다. 절차를 유리하게도 불리하게도 틀 수 있으나 어느 쪽인지 알려주지 않는다.</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ openSeraphine }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed; inset:0; z-index:60; background:rgba(4,6,11,.88); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:28px; animation:veilIn .2s ease-out">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:1020px; max-height:88vh; overflow:auto; border:1px solid rgba(201,164,99,.4); background:linear-gradient(180deg,#101a2c,#070b13); display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); animation:modalIn .28s ease-out; box-shadow:0 40px 120px rgba(0,0,0,.8)">
+        <img src="uploads/세라피네.png" alt="세라피네 르웰린" style="display:block; width:100%; height:100%; min-height:420px; object-fit:cover; object-position:50% 14%"/>
+        <div style="padding:clamp(28px,4vw,46px); display:flex; flex-direction:column; gap:18px">
+          <div onClick="{{ close }}" style="position:absolute; top:14px; right:16px; width:38px; height:38px; border:1px solid rgba(201,164,99,.4); color:#e2cf9e; display:grid; place-items:center; cursor:pointer; font-size:16px" style-hover="background:rgba(201,164,99,.15)">✕</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.3em; color:rgba(201,164,99,.85)">Ⅴ · SAINT</div>
+          <h3 style="margin:0; font-family:'Nanum Myeongjo',serif; font-weight:800; font-size:clamp(26px,3.4vw,34px); color:#f2e7cd">세라피네 르웰린</h3>
+          <div style="font-size:13px; letter-spacing:.16em; color:#959db0">30 · 여 · 신전 성녀 후보 · 165cm</div>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">허리까지 오는 백금발, 옅은 하늘색 눈. 창백하고 몸이 약해 보인다. 장식 없는 흰 예복, 늘 성서를 안고 있다. 조용하고 예의 바르며, 사람을 정면으로 보지 않는다.</p>
+          <p style="margin:0; font-size:15px; line-height:2.05; color:#aab1bf; text-wrap:pretty">카슈안의 첫사랑으로 알려져 있으나 두 사람은 맺어진 적도, 서로를 연인으로 여긴 적도 없다. 이 오해는 양가의 기대가 만든 것이다. 대화 중반 이전에는 등장하지 않는다.</p>
+          <sc-if value="{{ showSpoilers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:18px 20px; border-left:1px solid rgba(201,164,99,.45); background:rgba(201,164,99,.05); font-size:14px; line-height:1.95; color:#c8b98f">적대적이지 않고 오히려 미안해한다. 방벽의 이상 징후를 감지해 신전 복귀를 미루고 있으며, 신성력의 흔적을 확인하려 당신의 손을 보려 한다. 어느 쪽도 설명하지 않는다.</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSpoilers&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;내용&quot;},&quot;snow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;연출&quot;}}">
+class Component extends DCLogic {
+  state = { open: null };
+  componentDidMount() {
+    this._esc = e => { if (e.key === 'Escape') this.setState({ open: null }); };
+    window.addEventListener('keydown', this._esc);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._esc); }
+  renderVals() {
+    const open = this.state.open;
+    const caps = { kashuan: 'Kashuan', deon: 'Deon', lian: 'Lian', ernest: 'Ernest', seraphine: 'Seraphine' };
+    const out = {
+      showSpoilers: this.props.showSpoilers ?? true,
+      snow: this.props.snow ?? true,
+      close: () => this.setState({ open: null }),
+      stop: e => e.stopPropagation(),
+    };
+    Object.keys(caps).forEach(k => {
+      out['open' + caps[k]] = open === k;
+      out['toggle' + caps[k]] = () => this.setState({ open: k });
+    });
+    return out;
+  }
+}
+</script>
+</body>
+</html>
